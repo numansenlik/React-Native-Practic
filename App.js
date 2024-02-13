@@ -9,6 +9,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import Loading from "./src/components/Loading";
 // Text yazı yazmamızı sağlayan comp
 // view container olarak kullanılıyor
 // React fragment yerine view kullanılıyor
@@ -16,31 +17,33 @@ import {
 export default function App() {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [fullName, setFullName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <View style={styles.container}>
       <Image
         style={styles.logoImage}
         source={require("./assets/images/login.png")}
       />
-      <Text style={styles.textStyle}>Name Surname: {fullName}</Text>
-      <Text style={styles.textStyle}>Name</Text>
+      <Text style={styles.textStyle}>Email</Text>
       <TextInput
-        placeholder="Enter Your Name"
+        placeholder="Enter Your Email"
         value={name}
         onChangeText={setName}
         style={styles.textInput}
+        inputMode="email"
       />
-      <Text style={styles.textStyle}>Surname</Text>
+      <Text style={styles.textStyle}>Password</Text>
       <TextInput
-        placeholder="Enter Your Name"
+        secureTextEntry={true}
+        placeholder="Enter Your Password"
         value={surname}
         onChangeText={setSurname}
         style={styles.textInput}
       />
       <Pressable
         onPress={() => {
-          setFullName(name + " " + surname);
+          setIsLoading(true);
+          setTimeout(() => setIsLoading(false), 2000);
         }}
         style={({ pressed }) => [
           {
@@ -51,6 +54,7 @@ export default function App() {
       >
         <Text>Kayit </Text>
       </Pressable>
+      {isLoading && <Loading />}
       <StatusBar style="auto" />
       {/* <View style={styles.subContainer}>
         <Text style={styles.textStyle}>Test Text</Text>
