@@ -1,7 +1,14 @@
 // Status bar Ekranın üstünün temsilcisidir ve container ın stillerine tabi olmuyor
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 // Text yazı yazmamızı sağlayan comp
 // view container olarak kullanılıyor
 // React fragment yerine view kullanılıyor
@@ -12,31 +19,37 @@ export default function App() {
   const [fullName, setFullName] = useState("");
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.logoImage}
+        source={require("./assets/images/login.png")}
+      />
       <Text style={styles.textStyle}>Name Surname: {fullName}</Text>
       <Text style={styles.textStyle}>Name</Text>
       <TextInput
         placeholder="Enter Your Name"
         value={name}
-        onChangeText={(i) => {
-          setName(i);
-        }}
+        onChangeText={setName}
         style={styles.textInput}
       />
       <Text style={styles.textStyle}>Surname</Text>
       <TextInput
         placeholder="Enter Your Name"
         value={surname}
-        onChangeText={(i) => {
-          setSurname(i);
-        }}
+        onChangeText={setSurname}
         style={styles.textInput}
       />
       <Pressable
-        onPress={({ pressed }) => {
-          setFullName(name + surname);
+        onPress={() => {
+          setFullName(name + " " + surname);
         }}
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed ? "lightgreen" : "lightblue",
+          },
+          styles.basicButton,
+        ]}
       >
-        <Text style={styles.textInput}>Tiklayiniz</Text>
+        <Text>Kayit </Text>
       </Pressable>
       <StatusBar style="auto" />
       {/* <View style={styles.subContainer}>
@@ -71,11 +84,28 @@ const styles = StyleSheet.create({
   textInput: {
     backgroundColor: "lightgray",
     width: "70%",
-    height: 30,
+    height: 40,
     borderWidth: 0.5,
     borderRadius: 10,
     textAlign: "center",
     justifyContent: "center",
+  },
+  basicButton: {
+    textAlign: "center",
+    justifyContent: "center",
+    width: "70%",
+    height: 40,
+    borderRadius: 1,
+    borderColor: "lightgray",
+    borderWidth: 1,
+    alignItems: "center",
+    marginTop: 30,
+    borderRadius: 20,
+  },
+  logoImage: {
+    width: 100,
+    height: 100,
+    marginBottom: 60,
   },
 });
 
