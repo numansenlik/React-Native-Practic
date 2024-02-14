@@ -14,7 +14,7 @@ import Loading from "../components/Loading";
 // view container olarak kullanılıyor
 // React fragment yerine view kullanılıyor
 
-const LoginPage = () => {
+const LoginPage = ({ navigation }) => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -49,10 +49,24 @@ const LoginPage = () => {
           {
             backgroundColor: pressed ? "lightgreen" : "lightblue",
           },
-          styles.basicButton,
+          styles.loginButton,
         ]}
       >
-        <Text>Kayit </Text>
+        <Text>Login </Text>
+      </Pressable>
+      <Pressable
+        onPress={() => {
+          navigation.navigate("Singup");
+          setTimeout(() => setIsLoading(false), 2000);
+        }}
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed ? "lightgreen" : "lightblue",
+          },
+          styles.singUpButton,
+        ]}
+      >
+        <Text>Sign Up </Text>
       </Pressable>
       {isLoading && <Loading />}
       <StatusBar style="auto" />
@@ -96,10 +110,22 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
   },
-  basicButton: {
+  loginButton: {
     textAlign: "center",
     justifyContent: "center",
     width: "70%",
+    height: 40,
+    borderRadius: 1,
+    borderColor: "lightgray",
+    borderWidth: 1,
+    alignItems: "center",
+    marginTop: 30,
+    borderRadius: 20,
+  },
+  singUpButton: {
+    textAlign: "center",
+    justifyContent: "center",
+    width: "30%",
     height: 40,
     borderRadius: 1,
     borderColor: "lightgray",
