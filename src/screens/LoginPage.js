@@ -56,8 +56,7 @@ const LoginPage = ({ navigation }) => {
       </Pressable>
       <Pressable
         onPress={() => {
-          navigation.navigate("Singup");
-          setTimeout(() => setIsLoading(false), 2000);
+          navigation.navigate("Signup");
         }}
         style={({ pressed }) => [
           {
